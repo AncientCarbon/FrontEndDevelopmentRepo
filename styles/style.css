@@ -65,10 +65,11 @@ img {
     transform: translate(-50%, -50%);
     color: white;
     text-align: center;
-    visibility: hidden;
-    transition: visibility 0.5s ease;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none; /* for being able to click on the image later */
 }
 
 .image-container:hover .image-text {
-    visibility: visible;
+    opacity: 1;
 }
