@@ -40,3 +40,73 @@ function prevPage() {
 
     location.replace(newPage);
 }
+
+let cart = [
+]
+
+function confirm(message) {
+    // TODO: make pop-up for user to confirm
+    return true;
+}
+
+function updateCartUI() {
+    console.clear();
+    console.log("Cart contents:", cart)
+    // TODO: update the webpage to display cart
+}
+
+function addToCart(itemId) {
+    if (!confirm("Add to cart?")) {
+        return;
+    }
+
+    const item = itemsForSale.find(item => item.id === itemId);
+    if (!item) {
+        console.error("Item not found");
+        return;
+    }
+
+    const existingItemIndex = cart.findIndex(cartItem => cartItem.id == item.id);
+    if (existingItemIndex !== -1) {
+        // update quantity if item is in cart
+        cart[existingItemIndex].quantity += 1;
+    }
+    else {
+        cart.push({...item, quantity: 1});
+    }
+    updateCartUI()
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const pictureGrid = document.querySelector('.pictureGrid');
+    itemsForSale.forEach(item => {
+        const itemHTML = `
+            <div class="image-container">
+                <img src="${item.image}" alt="image of ${item.name}">
+                <span class="image-text">
+                    ${item.name}<br>
+                    $${item.price}
+                    <button class="add-to-cart-btn" data-item-id="${item.id}">Add to Cart</button>
+                </span>
+            </div>
+        `;
+        pictureGrid.innerHTML += itemHTML;
+    });
+
+    // Now attach event listeners to the newly added buttons
+    document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const itemId = this.getAttribute('data-item-id');
+            addToCart(itemId);
+        });
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const itemId = this.getAttribute('data-item-id');
+            addToCart(itemId);
+        })
+    })
+})

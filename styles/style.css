@@ -45,6 +45,11 @@ img {
 .image-container {
     position: relative;
     overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .image-container img {
@@ -56,6 +61,12 @@ img {
 .image-container:hover img {
     filter: brightness(50%);
     transform: scale(1.1);
+}
+
+.add-to-cart-btn {
+    width: 100%;
+    text-align: center;
+    display: block;
 }
 
 .image-text {
@@ -70,6 +81,6 @@ img {
     pointer-events: none; /* for being able to click on the image later */
 }
 
-.image-container:hover .image-text {
+.image-container:hover .image-text, .add-to-cart-btn {
     opacity: 1;
 }
